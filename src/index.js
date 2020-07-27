@@ -11,9 +11,10 @@ export const useSimpleForm = () => {
                 var treeObject = {};
 
                 function treeHTML(element, object) {
+                    const type = element.getAttribute('type')?.toLowerCase();
                     if (
                         (element.nodeName === 'INPUT' &&
-                            element.getAttribute('type') !== 'submit') ||
+                            !['submit', 'button', 'reset'].includes(type)) ||
                         element.nodeName === 'SELECT' ||
                         element.nodeName === 'TEXTAREA'
                     ) {

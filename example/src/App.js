@@ -50,7 +50,10 @@ const App = () => {
                 temporibus animi reprehenderit ipsam ab aliquam modi.`}
                 ></textarea>
             </fieldset>
-            <input type='submit' name='submeter' />
+            <input type='search' name='search' />
+            <input type='submit' name='submeter' value='SUBMETER FORMULÁRIO' />
+            <input type='reset' name='reset' value='RESETAR FORMULÁRIO' />
+            <input type='button' name='botao' value='BOTÃO INPUT' />
         </form>
     );
 };
