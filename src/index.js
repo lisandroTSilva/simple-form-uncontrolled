@@ -5,20 +5,61 @@ export const useSimpleForm = () => {
 
     useEffect(() => {
         if (refForm.current !== null) {
-            const formClone = refForm.current;
-
             const mapDOM = (element, json) => {
                 var treeObject = {};
 
                 function treeHTML(element, object) {
-                    const type = element.getAttribute('type')?.toLowerCase();
-                    if (
-                        (element.nodeName === 'INPUT' &&
-                            !['submit', 'button', 'reset'].includes(type)) ||
-                        element.nodeName === 'SELECT' ||
-                        element.nodeName === 'TEXTAREA'
-                    ) {
-                        object[element.getAttribute('name')] = element.value;
+                    switch (element.nodeName) {
+                        case 'INPUT':
+                            /* TODO: Resolver type=file com e sem multiplos */
+
+                            // eslint-disable-next-line no-case-declarations
+                            const type = element.type.toLowerCase();
+
+                            if (
+                                ['submit', 'button', 'reset', 'image'].includes(
+                                    type
+                                )
+                            )
+                                break;
+
+                            if (type === 'checkbox') {
+                                // eslint-disable-next-line no-case-declarations
+                                const name = element.getAttribute('name');
+                                object[name] = object[name] ?? [];
+                                if (element.checked) {
+                                    object[name].push(element.value);
+                                }
+                            } else if (type === 'file') {
+                                console.log('tratar file');
+                            } else {
+                                object[element.getAttribute('name')] =
+                                    element.value;
+                            }
+                            break;
+                        case 'SELECT':
+                            // eslint-disable-next-line no-case-declarations
+                            const name = element.getAttribute('name');
+                            // eslint-disable-next-line no-case-declarations
+                            const isMultiple = element.hasAttribute('multiple');
+
+                            if (isMultiple) {
+                                object[name] = [];
+                                for (const option of element.querySelectorAll(
+                                    'option:checked'
+                                )) {
+                                    object[name].push(option.value);
+                                }
+                            } else {
+                                object[name] = element.value;
+                            }
+                            break;
+                        case 'TEXTAREA':
+                            object[element.getAttribute('name')] =
+                                element.value;
+                            break;
+                        default:
+                            break;
                     }
 
                     const nodeList = element.childNodes;
@@ -49,9 +90,7 @@ export const useSimpleForm = () => {
 
                 return json ? JSON.stringify(treeObject) : treeObject;
             };
-
-            // refForm.current = Form
-            refForm.current.getJson = () => mapDOM(formClone);
+            refForm.current.getJson = () => mapDOM(refForm.current);
         }
     });
 
