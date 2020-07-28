@@ -28,7 +28,7 @@ class Example extends Component {
 
 ## License
 
-MIT © [lisandroTSilva](https://github.com/lisandroTSilva)
+MIT © [license](https://github.com/lisandroTSilva/simple-form-uncontrolled/blob/master/LICENSE)
 
 ## Contribute
 
