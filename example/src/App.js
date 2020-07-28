@@ -6,7 +6,13 @@ const App = () => {
     const [ref] = useSimpleForm();
 
     return (
-        <form ref={ref}>
+        <form
+            ref={ref}
+            onSubmit={(e) => {
+                e.preventDefault();
+                console.log('Dados: ', ref.current.getJson());
+            }}
+        >
             <fieldset name='fieldName2'>
                 <fieldset name='fieldName'>
                     <input type='text' name='nome1' defaultValue='1' />
@@ -44,6 +50,10 @@ const App = () => {
                 temporibus animi reprehenderit ipsam ab aliquam modi.`}
                 ></textarea>
             </fieldset>
+            <input type='search' name='search' />
+            <input type='submit' name='submeter' value='SUBMETER FORMULÁRIO' />
+            <input type='reset' name='reset' value='RESETAR FORMULÁRIO' />
+            <input type='button' name='botao' value='BOTÃO INPUT' />
         </form>
     );
 };
