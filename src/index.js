@@ -9,10 +9,11 @@ export const useSimpleForm = () => {
                 var treeObject = {};
 
                 function treeHTML(element, object) {
+                    const name = element.getAttribute('name');
+                    const isMultiple = element.hasAttribute('multiple');
+
                     switch (element.nodeName) {
                         case 'INPUT':
-                            /* TODO: Resolver type=file com e sem multiplos */
-
                             // eslint-disable-next-line no-case-declarations
                             const type = element.type.toLowerCase();
 
@@ -24,25 +25,25 @@ export const useSimpleForm = () => {
                                 break;
 
                             if (type === 'checkbox') {
-                                // eslint-disable-next-line no-case-declarations
-                                const name = element.getAttribute('name');
                                 object[name] = object[name] ?? [];
                                 if (element.checked) {
                                     object[name].push(element.value);
                                 }
                             } else if (type === 'file') {
-                                console.log('tratar file');
+                                object[name] = [];
+
+                                [...element.files].forEach((file) => {
+                                    if (isMultiple) {
+                                        object[name].push(file);
+                                    } else {
+                                        object[name] = file;
+                                    }
+                                });
                             } else {
-                                object[element.getAttribute('name')] =
-                                    element.value;
+                                object[name] = element.value;
                             }
                             break;
                         case 'SELECT':
-                            // eslint-disable-next-line no-case-declarations
-                            const name = element.getAttribute('name');
-                            // eslint-disable-next-line no-case-declarations
-                            const isMultiple = element.hasAttribute('multiple');
-
                             if (isMultiple) {
                                 object[name] = [];
                                 for (const option of element.querySelectorAll(
@@ -55,8 +56,7 @@ export const useSimpleForm = () => {
                             }
                             break;
                         case 'TEXTAREA':
-                            object[element.getAttribute('name')] =
-                                element.value;
+                            object[name] = element.value;
                             break;
                         default:
                             break;

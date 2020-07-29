@@ -15,13 +15,18 @@ const App = () => {
             }}
             noValidate
         >
+            Arquivo: <input type='file' name='file' />
+            <br />
+            Arquivos: <input type='file' name='files' multiple />
+            <br />
+            {/*
             <input
                 type='image'
                 name='image'
                 alt='texugo'
                 defaultValue='image'
             />
-
+            
             <input type='reset' name='reset' defaultValue='reset' />
             <input type='submit' name='submit' defaultValue='submit' />
             <input type='button' name='button' defaultValue='button' />
@@ -32,7 +37,6 @@ const App = () => {
             <input type='date' name='date' defaultValue='date' />
             <input type='datetime-local' name='local' defaultValue='local' />
             <input type='email' name='email' defaultValue='email' />
-            <input type='file' name='file' />
             <input type='hidden' name='hidden' defaultValue='hidden' />
             <input type='month' name='month' defaultValue='month' />
             <input type='number' name='number' defaultValue='number' />
@@ -46,6 +50,7 @@ const App = () => {
             <input type='url' name='url' defaultValue='url' />
             <input type='week' name='week' defaultValue='week' />
 
+
             <select multiple name='multiplos-options'>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -53,7 +58,7 @@ const App = () => {
                 <option value='4'>4</option>
                 <option value='5'>5</option>
             </select>
-
+             */}
             {/* <input type='text' name='teste' />
 
             <select name='unico-options'>
@@ -83,7 +88,6 @@ const App = () => {
                 <input type='radio' name='radio' value='2' /> 2
                 <input type='radio' name='radio' value='3' /> 3
             </div> */}
-
             <button type='submit'>getJson</button>
         </form>
     );
