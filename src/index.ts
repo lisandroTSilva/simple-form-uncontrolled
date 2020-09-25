@@ -5,17 +5,18 @@ export const useSimpleForm = () => {
 
     useEffect(() => {
         if (refForm.current !== null) {
-            const mapDOM = (element, json) => {
+            const mapDOM = (element: HTMLElement, json: any = null) => {
                 var treeObject = {};
 
-                function treeHTML(element, object) {
+                function treeHTML(element: any, object: any) {
                     const name = element.getAttribute('name');
                     const isMultiple = element.hasAttribute('multiple');
 
                     switch (element.nodeName) {
                         case 'INPUT':
-                            // eslint-disable-next-line no-case-declarations
-                            const type = element.type.toLowerCase();
+                            const type = element
+                                .getAttribute('type')
+                                .toLowerCase();
 
                             if (
                                 ['submit', 'button', 'reset', 'image'].includes(
