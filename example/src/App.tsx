@@ -9,7 +9,7 @@ const App = () => {
     return (
         <form
             ref={ref}
-            onSubmit={(e) => {
+            onSubmit={(e: any) => {
                 e.preventDefault();
                 console.log('evento json: ', e.target.getJson());
             }}
